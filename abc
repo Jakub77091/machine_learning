@@ -1,0 +1,15 @@
+ile_danych = 50;
+X = [rand(ile_danych, 1)*10,repmat([1], ile_danych, 1)];
+znany_beta = [3;5];
+Y = X*znany_beta + randn(ile_danych, 1);
+beta_hat = ols(X, Y);
+
+X_linspace = linspace(0,10,1000);
+Y_idealne = [X_linspace', repmat([1], 1000,1)]*znany_beta;
+Y_oszacowana = [X_linspace',repmat([1],1000,1)]*beta_hat;
+hold on
+
+plot(X(:,1), Y, 'o')
+plot(X_linspace, Y_idealne, 'r---')
+plot(X_linspace, Y_oszacowana, 'g---')
+legend('dane wejsciowe','idealne dopasowanie', 'oszacowanie dopasowania')
